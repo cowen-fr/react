@@ -72,7 +72,31 @@ class Person extends Component {
 ReactDOM.render(<Person {...obj} />,document.getElementById("root"));
 ```
 
+当然我们也可以使用`Component.defaultProps`设置默认的`props`值。
+
+```jsx
+import React, {Component} from 'react';
+class Person extends Component{
+    constructor(props){
+        super(props);
+    }
+    render(){
+        return (
+            <h1>{this.props.name}</h1>
+        )
+    }
+}
+Person.defaultProps={
+    name:"cowen"
+}
+export default Person;
+```
+
 #### 4、`state`：
+
+#### 5、事件处理：
+
+#### 6、生命周期：
 
 
 
