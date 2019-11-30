@@ -98,6 +98,32 @@ export default Person;
 
 #### 6、生命周期：
 
+组件的声明周期可分为三个状态：
 
+- `Mounting`：已插入真实DOM
 
+- `Updating`：正在被重新渲染
 
+- `Unmounting`：已移出真实DOM
+
+生命周期的方法有：
+
+- `componentWillMount`：
+
+  `componentWillMount`会在组件加载（render函数执行之前）之前执行。
+
+- `componentDidMount`：
+
+  `componentDidMount`会在组件第一次加载之后（render函数执行之后）执行。
+
+- `componentWillReceiveProps`：
+
+- `shouldComponentUpdate`：
+
+- `componentWillUpdate`：
+
+- `componentDidUpdate`：
+
+- `componentWillUnmount`：
+
+  组件在卸载的时候会加载`componentWillUnmount`生命周期函数，常用于事件回收和清除定时器等。
