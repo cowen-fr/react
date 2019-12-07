@@ -34,13 +34,13 @@ import Index from './component/index.js';
 import About from './component/about.js';
 import Vip from './component/vip.js';
 const App=(props)=>(
-	<Router>
-		<Switch>
-			<Route path="/" component={Index} />
-			<Route path="/about" component={About} />
-			<Route path="/vip" component={Vip} />
-		</Switch>
-	</Router>
+    <Router>
+        <Switch>
+            <Route path="/" component={Index} />
+            <Route path="/about" component={About} />
+            <Route path="/vip" component={Vip} />
+        </Switch>
+    </Router>
 );
 export default App;
 ```
@@ -55,18 +55,18 @@ export default App;
 import React from 'react';
 import {Link} from 'react-router-dom';
 const Index=(props)=>(
-	<div className="wrap">
-		<ul>
-			<li><Link to="/">首页</Link></li>
-			<li><Link to="/about">关于</Link></li>
-			<li><Link to="vip">VIP</Link></li>
-		</ul>	
-	</div>
+    <div className="wrap">
+        <ul>
+            <li><Link to="/">首页</Link></li>
+            <li><Link to="/about">关于</Link></li>
+            <li><Link to="vip">VIP</Link></li>
+        </ul>    
+    </div>
 );
 export default Index;
 ```
 
-`<NavLink />`也是提供了一种跳转链接，并且会给出一个页面的`current`样式。
+`<NavLink />`也是提供了一种跳转链接，并且会给出一个页面的`current`样式。类似于`router`的路径匹配模式，`NavLink`也会匹配路径中的公共部分，为了解决该问题，我们可以使用`exact`参数。
 
 ```jsx
 import React from 'react';
@@ -74,12 +74,9 @@ import {NavLink} from 'react-router-dom';
 import About from './component/about.js';
 import Vip from './component/vip.js';
 <Switch>
-	<Route path="/about" component={About} />
-
-	<Route path="/vip" component={Vip} />
-
-	<Route path="/home" component={Index} />
-
+    <Route exact path="/about" component={About} />
+    <Route exact path="/vip" component={Vip} />
+    <Route exact path="/" component={Index} />
 </Switch>
 ```
 
@@ -118,12 +115,12 @@ import NotFound from './component/error.js';
 const APP = (props) => {
   return (
     <Router>
-    	<Switch>
-	    	<Route exact={true} path="/" component={Index} />
-	    	<Route path="/about" component={About} />
-	    	<Route path="/vip" component={Vip} />
-	    	<Route component={NotFound} />
-    	</Switch>
+        <Switch>
+            <Route exact={true} path="/" component={Index} />
+            <Route path="/about" component={About} />
+            <Route path="/vip" component={Vip} />
+            <Route component={NotFound} />
+        </Switch>
     </Router>
   )
 }
@@ -153,4 +150,45 @@ const App = (props) => {
 
 #### 6、`Route Props`：
 
+对于动态路由，我们可以使用参数传递来渲染对应的组件，参数的类型包括以下三种：
 
+- `history`对象：
+
+  可以向原生js一样执行前进、后退操作。
+
+- `location`对象：
+
+  可以获取`hash`、`search`参数。
+
+- `match`对象：
+
+  可以获取url中的参数`params`参数。
+
+```jsx
+<User path="/user/:id" />
+this.props.match.params.id;//获取动态路径中的参数
+this.props.location.search;//请求参数
+this.props.history.push("/");//跳转操作
+```
+
+#### 7、`<Redirect />`：
+
+`Redirect`用于路由的跳转，也可以用于组件内的跳转。
+
+```jsx
+import React,{Component} from 'react';
+import {Redirect} from 'react-router-dom';
+class User extends Component{
+    constructor(props){
+        super(props)
+    }
+    render(){
+        this.props.match.params.id=="001"?
+        <Redirect to=`myprofile${this.props.match.params.id}` />
+        :
+        <div className="user-wrap">
+            welcome
+        </div>
+    }
+}
+```
