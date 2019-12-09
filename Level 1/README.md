@@ -192,3 +192,51 @@ class User extends Component{
     }
 }
 ```
+
+#### 8、`<withRouter />`：
+
+对于一些无状态组件，高级组件`withRouter`可以将无状态组件进行包裹加工，使其变成含有router参数的组件。
+
+```jsx
+//父组件
+import React from 'react';
+import Vip from './component/vip.js';
+import {BrowserRouter as Router} from 'react-router-dom';
+const App = (props) => {
+  return (
+    <Router className="home-wrap">
+    	<h1>首页</h1>
+    	<Vip />	
+    </Router>
+  )
+}
+
+export default App;
+//子组件
+import React from 'react';
+import {withRouter} from 'react-router';
+const Vip = (props) => {
+
+  return (
+    <div>Vip</div>
+  )
+}
+const WithRouter=withRouter(Vip);
+export default WithRouter;
+```
+
+#### 9、`<Prompt />`：
+
+`<Prompt />`使用在路由跳转时的用户确认，确定的话就会跳转至新的路由，否则就会保持原状。
+
+```jsx
+import React from 'react';
+import {Link,NavLink,Prompt} from 'react-router-dom';
+const Index=(props)=>(
+	<div>
+		<Prompt message="您确定离开？" />
+		<h1>这里是首页</h1>
+	</div>
+);
+export default Index;
+```
